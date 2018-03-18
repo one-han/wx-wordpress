@@ -1,0 +1,3 @@
+/* components/post/post.wxss */
+
+@import '../../style/widget/weui-media-box/weui-media-box.wxss';
