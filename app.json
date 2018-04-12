@@ -6,7 +6,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "晗大大的杂货铺",
+    "navigationBarTitleText": "十分杂货铺",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
@@ -28,5 +28,6 @@
         "text": "我"
       }
     ]
-  }
+  },
+  "debug": true
 }

@@ -1,14 +1,16 @@
 <!--index.wxml-->
-<import src="/wxParse/wxParse.wxml"/>
+<import src="/wxParse/wxParse.wxml" />
 
 <view class="page">
-    <view class="page__bd">
-        <view class="weui-panel">
-            <view class="weui-panel__hd">文字列表附来源</view>
-            <view class="weui-panel__bd">
-                <post title="{{title}}" desc="{{desc}}" 
-                time="{{time}}" category="{{category}}" likes="5"></post>
-            </view>
+  <view class="page__bd">
+    <view class="weui-panel">
+      <view class="weui-panel__hd">文字列表附来源</view>
+      <view class="weui-panel__bd">
+        <view wx:for="{{posts}}" wx:key="pkey">
+          <post title="{{item.title}}" desc="{{item.desc}}" time="{{item.time}}" 
+            likes="{{item.likes}}" url="{{item.url}}" />
         </view>
+      </view>
     </view>
+  </view>
 </view>

@@ -1,4 +1,6 @@
 // components/post/post.js
+var wxParse = require('../../wxParse/wxParse.js');
+
 Component({
   /**
    * 组件的属性列表
@@ -37,10 +39,13 @@ Component({
 
   },
 
+  attached:function() {
+    console.log(this.properties.desc);
+    wxParse.wxParse('article', 'html', this.properties.desc, this, 5);
+  },
+
   ready:function () {
-    this.setData({
-      image: base64.icon20,
-    });
+
   }
 
 })
