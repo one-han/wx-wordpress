@@ -1,5 +1,6 @@
 /**index.wxss**/
 @import "/wxParse/wxParse.wxss";
+
 .userinfo {
   display: flex;
   flex-direction: column;

@@ -26,6 +26,9 @@ Component({
     },
     likes: {
       type: String
+    },
+    postid: {
+      type: Number
     }
   },
 
@@ -39,6 +42,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
+
   },
+
+  attached: function() {
+  }
 
 })

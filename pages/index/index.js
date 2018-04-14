@@ -3,7 +3,7 @@ var wpUtil = require('../../utils/wpUtil.js');
 
 //获取应用实例
 const app = getApp()
-var postUrl = app.globalData.server + '/wp-json/wp/v2/posts';
+var postsUrl = app.globalData.server + '/wp-json/wp/v2/posts';
 
 Page({
   data: {
@@ -35,12 +35,12 @@ Page({
     this.data.page = 1;
     this.data.hasMore = true;
     this.data.keyword = e.detail
-    wpUtil.loadAllPosts(postUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
+    wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
     this.data.page++;
   },
 
   onLoad: function () {
-    wpUtil.loadAllPosts(postUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
+    wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
     this.data.page++;
   },
 
@@ -48,7 +48,7 @@ Page({
     this.data.posts = [];
     this.data.page = 1;
     this.data.hasMore = true;
-    wpUtil.loadAllPosts(postUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
+    wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
     this.data.page++;
     wx.stopPullDownRefresh()
   },
@@ -56,7 +56,7 @@ Page({
   onReachBottom: function () {
     console.debug("has more" + this.data.hasMore);
     if (this.data.hasMore) {
-      wpUtil.loadAllPosts(postUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
+      wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
       this.data.page++;
     } else {
       wx.showToast({

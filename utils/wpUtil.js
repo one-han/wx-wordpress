@@ -1,6 +1,6 @@
 var wxParse = require('../wxParse/wxParse.js');
 
-const loadAllPosts = function (url, page, keyword, onSuccess, onFail) {
+const loadPosts = function (url, page, keyword, onSuccess, onFail) {
   wx.request({
     url: url,
     data: {
@@ -8,7 +8,7 @@ const loadAllPosts = function (url, page, keyword, onSuccess, onFail) {
       search: keyword
     },
     success: function (res) {
-      console.debug("loadAllPosts success" + res);
+      console.debug("loadPosts success" + res);
       if (res.statusCode == 200) {
         var posts = buildPost(res.data);
         onSuccess(posts);
@@ -17,11 +17,28 @@ const loadAllPosts = function (url, page, keyword, onSuccess, onFail) {
       }
     },
     fail: function (res) {
-      console.debug("loadAllPosts fail" + res);
+      console.debug("loadPosts fail" + res);
       onFail(res);
     }
   });
 };
+
+const loadPost = function (url, onSuccess, onFail) {
+  wx.request({
+    url: url,
+    data: {
+    },
+    success: function (res) {
+      console.debug("loadPost success" + res);
+      if (res.statusCode == 200) {
+      } else {
+      }
+    },
+    fail: function (res) {
+      console.debug("loadPost fail" + res);
+    }
+  });
+}
 
 const buildPost = function (res) {
   var posts = [];
@@ -30,7 +47,8 @@ const buildPost = function (res) {
     post.title = res[i].title.rendered;
     post.desc = res[i].excerpt.rendered;
     post.time = res[i].date;
-    post.url = res[i].link;
+    post.id = res[i].id;
+    console.log(post)
     posts.push(post);
   }
   return posts;
@@ -38,5 +56,5 @@ const buildPost = function (res) {
 
 
 module.exports = {
-  loadAllPosts: loadAllPosts
+  loadPosts: loadPosts
 }
