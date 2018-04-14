@@ -1,0 +1,7 @@
+<template name="postlist">
+  <view class="weui-panel__bd">
+    <view wx:for="{{posts}}" wx:key="pkey">
+      <post title="{{item.title}}" desc="{{item.desc}}" time="{{item.time}}" likes="{{item.likes}}" url="{{item.url}}" />
+    </view>
+  </view>
+</template>

@@ -1,6 +1,7 @@
 <!--components/post/post.wxml-->
 <import src="../../wxParse/wxParse.wxml" />
-<navigator url='{{url}}' class="weui-media-box weui-media-box_text">
+
+<navigator url='/pages/article/article?url={{url}}' class="weui-media-box weui-media-box_text">
   <view class="weui-media-box__title weui-media-box__title_in-text">{{title}}</view>
   <template is="wxParse" data="{{wxParseData:article.nodes}}" />
   <view class="weui-media-box__info">

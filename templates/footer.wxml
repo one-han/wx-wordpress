@@ -1,0 +1,8 @@
+<template name="footer">
+  <view class="weui-footer">
+    <view class="weui-footer__links">
+      <navigator url="https://10cent.cn" class="weui-footer__link">十分杂货铺</navigator>
+    </view>
+    <view class="weui-footer__text">Copyright © 十分杂货铺 10cent.cn</view>
+  </view>
+</template>
