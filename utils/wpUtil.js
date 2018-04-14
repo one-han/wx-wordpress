@@ -1,13 +1,14 @@
 var wxParse = require('../wxParse/wxParse.js');
 
-const loadAllPosts = function (url, page, onSuccess, onFail) {
+const loadAllPosts = function (url, page, keyword, onSuccess, onFail) {
   wx.request({
     url: url,
     data: {
-      page: page
+      page: page,
+      search: keyword
     },
     success: function (res) {
-      console.log(res);
+      console.debug("loadAllPosts success" + res);
       if (res.statusCode == 200) {
         var posts = buildPost(res.data);
         onSuccess(posts);
@@ -16,7 +17,7 @@ const loadAllPosts = function (url, page, onSuccess, onFail) {
       }
     },
     fail: function (res) {
-      console.log(res);
+      console.debug("loadAllPosts fail" + res);
       onFail(res);
     }
   });

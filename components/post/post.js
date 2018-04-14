@@ -16,7 +16,10 @@ Component({
       type: String
     },
     desc: {
-      type: String
+      type: String,
+      observer: function (e) {
+        wxParse.wxParse('article', 'html', e, this, 5);
+      }
     },
     category: {
       type: String
@@ -36,16 +39,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
   },
-
-  attached:function() {
-    console.log(this.properties.desc);
-    wxParse.wxParse('article', 'html', this.properties.desc, this, 5);
-  },
-
-  ready:function () {
-
-  }
 
 })

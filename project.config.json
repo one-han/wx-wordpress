@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.91",
 	"appid": "wx32f829e28db3b352",
-	"projectname": "%E6%99%97%E5%A4%A7%E5%A4%A7%E7%9A%84%E6%9D%82%E8%B4%A7%E9%93%BA",
+	"projectname": "十分杂货铺",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

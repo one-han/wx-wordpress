@@ -9,14 +9,10 @@ Page({
   data: {
     posts: [],
     page: 1,
+    keyword: "",
     hasMore: true,
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.showToast({
-      title: 'Hello',
-    })
-  },
+
 
   onSuccess: function (result) {
     for (var i = 0; i < result.length; i++) {
@@ -34,22 +30,33 @@ Page({
     }
   },
 
+  onSearch: function(e) {
+    this.data.posts = [];
+    this.data.page = 1;
+    this.data.hasMore = true;
+    this.data.keyword = e.detail
+    wpUtil.loadAllPosts(postUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
+    this.data.page++;
+  },
+
   onLoad: function () {
-    wpUtil.loadAllPosts(postUrl, this.data.page, this.onSuccess, this.onFail);
+    wpUtil.loadAllPosts(postUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
     this.data.page++;
   },
 
   onPullDownRefresh: function () {
     this.data.posts = [];
     this.data.page = 1;
-    this.hasMore = true;
-    wpUtil.loadAllPosts(postUrl, this.data.page, this.onSuccess, this.onFail);
+    this.data.hasMore = true;
+    wpUtil.loadAllPosts(postUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
+    this.data.page++;
+    wx.stopPullDownRefresh()
   },
 
   onReachBottom: function () {
-    console.log(this.data.hasMore);
+    console.debug("has more" + this.data.hasMore);
     if (this.data.hasMore) {
-      wpUtil.loadAllPosts(postUrl, this.data.page, this.onSuccess, this.onFail);
+      wpUtil.loadAllPosts(postUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
       this.data.page++;
     } else {
       wx.showToast({
