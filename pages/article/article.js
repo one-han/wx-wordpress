@@ -1,9 +1,10 @@
 // pages/article/article.js
 var wpUtil = require('../../utils/wpUtil.js');
+var wxParse = require('../../wxParse/wxParse.js');
 
 //获取应用实例
 const app = getApp()
-var postUrl = app.globalData.server + '/wp-json/wp/v2/post/';
+var postUrl = app.globalData.server + '/wp-json/wp/v2/posts/';
 
 Page({
 
@@ -16,13 +17,11 @@ Page({
   },
 
   onSuccess: function (result) {
-    for (var i = 0; i < result.length; i++) {
-      this.data.posts.push(result[i]);
-    }
+    console.log(result);
     this.setData({
-      posts: this.data.posts,
-      hasMore: result.length == 10
+      title: result.title
     })
+    wxParse.wxParse('article', 'html', result.content, this, 5);
   },
 
   onFail: function (result) {
@@ -36,7 +35,7 @@ Page({
    */
   onLoad: function (options) {
     var url = postUrl + options.id
-    wpUtil.loadPost(url, onSuccess, onFail)
+    wpUtil.loadPost(url, this.onSuccess, this.onFail)
   },
 
   /**
