@@ -25,12 +25,19 @@ Page({
   },
 
   onFail: function (result) {
-    if (result.data.code == 'rest_post_invalid_page_number') {
-      this.data.hasMore = false;
+    if (result.data) {
+      if (result.data.code == 'rest_post_invalid_page_number') {
+        this.data.hasMore = false;
+      }
+    } else {
+      wx.showToast({
+        title: '网络开小差了',
+        icon: 'none'
+      })
     }
   },
 
-  onSearch: function(e) {
+  onSearch: function (e) {
     this.data.posts = [];
     this.data.page = 1;
     this.data.hasMore = true;

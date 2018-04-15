@@ -17,7 +17,6 @@ Page({
   },
 
   onSuccess: function (result) {
-    console.log(result);
     this.setData({
       title: result.title
     })
@@ -25,8 +24,13 @@ Page({
   },
 
   onFail: function (result) {
-    if (result.data.code == 'rest_post_invalid_page_number') {
-      this.data.hasMore = false;
+    if (result.data) {
+   
+    } else {
+      wx.showToast({
+        title: '网络开小差了',
+        icon: 'none'
+      })
     }
   },
 
