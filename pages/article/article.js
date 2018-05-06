@@ -4,7 +4,7 @@ var wxParse = require('../../wxParse/wxParse.js');
 
 //获取应用实例
 const app = getApp()
-var postUrl = app.globalData.server + '/wp-json/wp/v2/posts/';
+var postUrl = app.globalData.server + 'wp/v2/posts/';
 
 Page({
 
@@ -17,10 +17,10 @@ Page({
   },
 
   onSuccess: function (result) {
+    wxParse.wxParse('article', 'html', result.content, this, 5);
     this.setData({
       title: result.title
     })
-    wxParse.wxParse('article', 'html', result.content, this, 5);
   },
 
   onFail: function (result) {

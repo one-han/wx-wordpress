@@ -2,8 +2,8 @@
 var wpUtil = require('../../utils/wpUtil.js');
 
 //获取应用实例
-const app = getApp()
-var postsUrl = app.globalData.server + '/wp-json/wp/v2/posts';
+const app = getApp();
+var postsUrl = app.globalData.server + 'wp/v2/posts';
 
 Page({
   data: {

@@ -65,8 +65,39 @@ const buildPost = function (res) {
   return post;
 }
 
+const loadCategories = function (url, onSuccess, onFail) {
+  wx.request({
+    url: url,
+    data: {
+    },
+    success: function (res) {
+      console.debug("loadCategories success" + res);
+      if (res.statusCode == 200) {
+        var categories = buildCategories(res.data);
+        onSuccess(categories);
+      } else {
+        onFail(res);
+      }
+    },
+    fail: function (res) {
+      console.debug("loadCategories fail" + res);
+    }
+  });
+}
+
+const buildCategories = function (res) {
+  var categories = [];
+  for (var i = 0; i < res.length; i++) {
+    var category = {};
+    category.name = res[i].name;
+    category.count = res[i].count;
+    categories.push(category);
+  }
+  return categories;
+}
 
 module.exports = {
   loadPosts: loadPosts,
-  loadPost: loadPost
+  loadPost: loadPost,
+  loadCategories: loadCategories
 }

@@ -1,18 +1,43 @@
 // pages/categories.js
+var wpUtil = require('../../utils/wpUtil.js');
+
+//获取应用实例
+const app = getApp();
+var categoriesUrl = app.globalData.server + 'wp/v2/categories';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    categories: []
+  },
+
+  onSuccess: function (result) {
+    this.setData({
+      title: result.title
+    })
+  },
+
+  onFail: function (result) {
+    if (result.data) {
+
+    } else {
+      wx.showToast({
+        title: '网络开小差了',
+        icon: 'none'
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.debug("onLoad");
+    wpUtil.loadCategories(categoriesUrl, this.onSuccess, this.onFail);
+
   },
 
   /**

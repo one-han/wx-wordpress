@@ -5,6 +5,6 @@ App({
   
   globalData: {
     userInfo: null,
-    server: 'https://wx.10cent.cn'
+    server: 'https://wx.10cent.cn/wp-json/'
   }
 })
