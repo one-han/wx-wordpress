@@ -16,7 +16,7 @@ Page({
 
   onSuccess: function (result) {
     this.setData({
-      title: result.title
+      categories: result
     })
   },
 

@@ -1,11 +1,12 @@
 <!--pages/categories.wxml-->
 <import src="/templates/footer.wxml" />
-<import src="/templates/postlist.wxml" />
 
 <view class="page">
-  <view class="page__bd">
-    <view class="weui-panel">
-      
+  <view class="page__bd page__bd_spacing">
+    <view class="button-sp-area">
+      <block wx:for="{{categories}}" wx:key="pkey">
+        <button class="weui-btn mini-btn" type="default" size="mini">{{item.name}}</button>
+      </block>
     </view>
   </view>
   <template is="footer" />
