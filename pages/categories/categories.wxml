@@ -5,7 +5,7 @@
   <view class="page__bd page__bd_spacing">
     <view class="button-sp-area">
       <block wx:for="{{categories}}" wx:key="pkey">
-        <button class="weui-btn mini-btn" type="default" size="mini">{{item.name}}</button>
+        <button class="weui-btn mini-btn" type="default" size="mini" data-category='{{item.name}}' bindtap='onTap'>{{item.name}}</button>
       </block>
     </view>
   </view>

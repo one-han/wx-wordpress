@@ -47,7 +47,7 @@ Page({
   },
 
   onLoad: function () {
-    wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
+    wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, '', this.onSuccess, this.onFail);
     this.data.page++;
   },
 
@@ -63,7 +63,7 @@ Page({
   onReachBottom: function () {
     console.debug("has more" + this.data.hasMore);
     if (this.data.hasMore) {
-      wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
+      wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword,this.onSuccess, this.onFail);
       this.data.page++;
     } else {
       wx.showToast({

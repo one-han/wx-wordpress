@@ -1,11 +1,12 @@
 var wxParse = require('../wxParse/wxParse.js');
 
-const loadPosts = function (url, page, keyword, onSuccess, onFail) {
+const loadPosts = function (url, page, keyword, category, onSuccess, onFail) {
   wx.request({
     url: url,
     data: {
       page: page,
-      search: keyword
+      search: keyword,
+      categories: category
     },
     success: function (res) {
       console.debug("loadPosts success" + res);

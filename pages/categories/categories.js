@@ -87,5 +87,12 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  onTap: function(e) {
+    var category = e.target.dataset.category;
+    wx.navigateTo({
+      url: '/pages/posts/posts?category=' + category
+    });
   }
 })
