@@ -5,12 +5,16 @@ var wpUtil = require('../../utils/wpUtil.js');
 const app = getApp();
 var postsUrl = app.globalData.server + 'wp/v2/posts';
 
+var param = {
+  page: 1,
+  keyword: ""
+};
+
+var hasMore = true;
+
 Page({
   data: {
     posts: [],
-    page: 1,
-    keyword: "",
-    hasMore: true,
   },
 
 
@@ -18,16 +22,16 @@ Page({
     for (var i = 0; i < result.length; i++) {
       this.data.posts.push(result[i]);
     }
+    hasMore = result.length == 10
     this.setData({
       posts: this.data.posts,
-      hasMore: result.length == 10
     })
   },
 
   onFail: function (result) {
     if (result.data) {
       if (result.data.code == 'rest_post_invalid_page_number') {
-        this.data.hasMore = false;
+        hasMore = false;
       }
     } else {
       wx.showToast({
@@ -39,32 +43,32 @@ Page({
 
   onSearch: function (e) {
     this.data.posts = [];
-    this.data.page = 1;
-    this.data.hasMore = true;
-    this.data.keyword = e.detail
-    wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
-    this.data.page++;
+    param.page = 1;
+    param.keyword = e.detail
+    hasMore = true;
+    wpUtil.loadPosts(postsUrl, param, this.onSuccess, this.onFail);
+    param.page++;
   },
 
   onLoad: function () {
-    wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, '', this.onSuccess, this.onFail);
-    this.data.page++;
+    wpUtil.loadPosts(postsUrl, param, this.onSuccess, this.onFail);
+    param.page++;
   },
 
   onPullDownRefresh: function () {
     this.data.posts = [];
-    this.data.page = 1;
-    this.data.hasMore = true;
-    wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword, this.onSuccess, this.onFail);
-    this.data.page++;
+    param.page = 1;
+    hasMore = true;
+    wpUtil.loadPosts(postsUrl, param, this.onSuccess, this.onFail);
+    param.page++;
     wx.stopPullDownRefresh()
   },
 
   onReachBottom: function () {
     console.debug("has more" + this.data.hasMore);
-    if (this.data.hasMore) {
-      wpUtil.loadPosts(postsUrl, this.data.page, this.data.keyword,this.onSuccess, this.onFail);
-      this.data.page++;
+    if (hasMore) {
+      wpUtil.loadPosts(postsUrl, param, this.onSuccess, this.onFail);
+      param.page++;
     } else {
       wx.showToast({
         title: '没有更多了',

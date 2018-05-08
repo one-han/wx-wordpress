@@ -1,6 +1,6 @@
 {
   "enablePullDownRefresh": true,
-  "onReachBottomDistance": 50,
+  "onReachBottomDistance": 800,
   "usingComponents": {
     "post": "../../components/post/post",
     "searchbar": "../../components/searchbar/searchbar"

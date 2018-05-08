@@ -1,13 +1,9 @@
 var wxParse = require('../wxParse/wxParse.js');
 
-const loadPosts = function (url, page, keyword, category, onSuccess, onFail) {
+const loadPosts = function (url, data, onSuccess, onFail) {
   wx.request({
     url: url,
-    data: {
-      page: page,
-      search: keyword,
-      categories: category
-    },
+    data: data,
     success: function (res) {
       console.debug("loadPosts success" + res);
       if (res.statusCode == 200) {
@@ -92,6 +88,7 @@ const buildCategories = function (res) {
     var category = {};
     category.name = res[i].name;
     category.count = res[i].count;
+    category.cid = res[i].id;
     categories.push(category);
   }
   return categories;

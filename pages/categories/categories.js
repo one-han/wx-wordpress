@@ -90,9 +90,9 @@ Page({
   },
 
   onTap: function(e) {
-    var category = e.target.dataset.category;
+    var cid = e.target.dataset.cid;
     wx.navigateTo({
-      url: '/pages/posts/posts?category=' + category
+      url: '/pages/posts/posts?cid=' + cid
     });
   }
 })
