@@ -7,7 +7,7 @@ var postsUrl = app.globalData.server + 'wp/v2/posts';
 
 var param = {
   page: 1,
-  keyword: ""
+  search: ""
 };
 
 var hasMore = true;
@@ -44,7 +44,7 @@ Page({
   onSearch: function (e) {
     this.data.posts = [];
     param.page = 1;
-    param.keyword = e.detail
+    param.search = e.detail
     hasMore = true;
     wpUtil.loadPosts(postsUrl, param, this.onSuccess, this.onFail);
     param.page++;
@@ -65,7 +65,7 @@ Page({
   },
 
   onReachBottom: function () {
-    console.debug("has more" + this.data.hasMore);
+    console.debug("has more" + hasMore);
     if (hasMore) {
       wpUtil.loadPosts(postsUrl, param, this.onSuccess, this.onFail);
       param.page++;
